@@ -707,7 +707,13 @@ function debugGiveUpPoints() { state.upgradePoints+=5000; saveState(); updateUI(
 function debugUnlockAllBG() { BACKGROUNDS.forEach(bg=>{if(!state.backgrounds.includes(bg.id))state.backgrounds.push(bg.id)}); saveState(); renderBackgrounds(); showToast('🖼️ Все фоны разблокированы!'); }
 function debugGiveGiftCard() { giftCardCode=generateGiftCode(); rewardQueue=[{type:'giftCard',emoji:'🎁',name:'Подарочная карта',amount:1,rarity:'gift'}]; currentRewardIndex=0; document.getElementById('reward-popup').classList.add('active'); showNextReward(); }
 function debugResetAll() { if(confirm('Сбросить весь прогресс?')) { localStorage.removeItem('brawlboxes_save'); location.reload(); } }
-if(DebugMenuTest) document.getElementById('debug-btn').style.display='flex';
+const debugBtn = document.getElementById('debug-btn');
+if (debugBtn) {
+  debugBtn.style.display = 'none'; // Принудительно скрываем
+  if (DebugMenuTest === true) {
+    debugBtn.style.display = 'flex'; // Показываем только при true
+  }
+}
 
 // ============================================
 // GAME LOOP & INIT
